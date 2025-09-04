@@ -1,14 +1,11 @@
-FROM python:3.12-slim
+# nginx/Dockerfile
+FROM nginx:1.27-alpine
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# Кладём наш конфиг
+COPY default.conf /etc/nginx/conf.d/default.conf
 
-WORKDIR /app
+# Открываем порты (для документации)
+EXPOSE 8080 443
 
-COPY server.py /app/server.py
-
-RUN pip install --no-cache-dir flask==3.0.3
-
-EXPOSE 5000
-
-CMD ["python", "server.py"]
+# Запуск nginx в форграунде
+CMD ["nginx", "-g", "daemon off;"]
