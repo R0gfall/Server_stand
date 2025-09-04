@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: flask-app
+    expose:
+      - "5000"
+    networks:
+      - appnet
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx-gateway
+    ports:
+      - "8080:8080"   # HTTP (для удобства тестов)
+      - "443:443"     # HTTPS
+    depends_on:
+      - app
+    networks:
+      - appnet
+    volumes:
+      - /Users/beast/Desktop/study/NIR/route/docker-certs/nginx_certs:/etc/nginx/certs:ro
+    restart: unless-stopped
+
+networks:
+  appnet:
+    driver: bridge

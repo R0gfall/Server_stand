@@ -13,4 +13,7 @@ def api():
 
 if __name__ == "__main__":
     # Слушаем на всех интерфейсах, чтобы эмулятор/устройство видели сервер
-    app.run(host="0.0.0.0", port=9999, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
+
+
