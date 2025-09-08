@@ -12,7 +12,7 @@ def api():
     return jsonify(received=data, message="pong"), 200
 
 if __name__ == "__main__":
-    # Слушаем на всех интерфейсах, чтобы эмулятор/устройство видели сервер
+
     app.run(host="0.0.0.0", port=5000, debug=True)
 
 
